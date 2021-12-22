@@ -1,0 +1,7 @@
+.container{
+  display: grid;
+  grid-template-columns: 4;
+  grid-template-rows: 4;
+  background-color: blueviolet;
+  grid-gap: 5px;
+}
