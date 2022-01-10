@@ -1,17 +1,21 @@
 <div class="container">
-  <header>
-    <h1 class="page-heading">Lender</h1>
-  </header>
- <nav > At the core, the development model is greatly inspired by
-  existing models out there. The central repo holds two main
-  branches with an infinite lifetime:ipsum</nav>
- <div class="listings">At the core, the development model is greatly inspired by
-  existing models out there. The central repo holds two main
-  branches with an infinite lifetime:</div>
- <div class="listings">At the core, the development model is greatly inspired by
-  existing models out there. The central repo holds two main
-  branches with an infinite lifetime:</div>
- <div class="listings">At the core, the development model is greatly inspired by
-  existing models out there. The central repo holds two main
-  branches with an infinite lifetime:</div>
+  <div class="inner-container">
+  <div class="header bg-color">Lender</div>
+  <nav class="nav bg-color ">
+    <ul class="site-nav">
+      <li><a>Market Place</a></li>
+      <li><a>Lender Offers</a></li>
+      <li><a>Bid</a></li>
+    </ul>
+  </nav>
+  <div class="listings3 bg-color" *ngFor='let list of data'>
+      <ul>
+        <li>{{list.id}}</li>
+        <li>{{list.email}}</li>
+        <li>{{list.first_name}}</li>
+        <li>{{list.last_name}}</li>
+        <li>{{list.avatar}}</li>
+      </ul>
+    </div>
+</div>
 </div>

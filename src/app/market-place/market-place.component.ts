@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Playlist } from '../playlist';
+import { PlaylistService } from '../playlist.service';
 
 @Component({
   selector: 'app-market-place',
@@ -6,10 +8,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./market-place.component.css']
 })
 export class MarketPlaceComponent implements OnInit {
-
-  constructor() { }
-
+  playList:Playlist[]=[];
+  errorMessage
+  constructor(private playListService:PlaylistService) { }
   ngOnInit() {
+    this.playListService.getPlaylist().subscribe({
+      next: playList =>{ this.playList= playList;
+        console.log(playList)
+      },
+      error: err => this.errorMessage = err
+    });
   }
 
 }
