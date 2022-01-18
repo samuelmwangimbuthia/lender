@@ -2,13 +2,31 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
+import { MarketPlaceComponent } from './market-place/market-place.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { SiteNavigationComponent } from './site-navigation/site-navigation.component';
+import { WelcomePageComponent } from './welcome-page/welcome-page.component';
+import { RouterModule, Routes } from '@angular/router';
+
+const appRoutes:Routes = [
+  {path: 'market', component: MarketPlaceComponent},
+  {path: 'home', component: WelcomePageComponent},
+  {path: '', redirectTo: 'market', pathMatch: 'full'},
+
+]
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MarketPlaceComponent,
+    SiteNavigationComponent,
+    WelcomePageComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule,
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [],
   bootstrap: [AppComponent]

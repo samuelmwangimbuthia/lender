@@ -1,0 +1,13 @@
+.welcome {
+  grid-column: 2/5;
+  grid-row: 2/5;
+  background-image: linear-gradient(90deg, white, blue);
+  font-size: 5em;
+  position: relative;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-weight: bold;
+  text-align: center;
+  color: rgb(224, 252, 252);
+
+}
+
