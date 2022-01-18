@@ -1,21 +1,16 @@
 <div class="container">
   <div class="inner-container">
-  <div class="header bg-color">Lender</div>
-  <nav class="nav bg-color ">
-    <ul class="site-nav">
-      <li><a>Market Place</a></li>
-      <li><a>Lender Offers</a></li>
-      <li><a>Bid</a></li>
-    </ul>
-  </nav>
-  <div class="listings3 bg-color" *ngFor='let list of data'>
+    <div class="header bg-color">Lender</div>
+      <app-site-navigation class="nav bg-color"></app-site-navigation>
+    <div class="listings3 bg-color" *ngFor="let list of _playList.data">
       <ul>
-        <li>{{list.id}}</li>
-        <li>{{list.email}}</li>
-        <li>{{list.first_name}}</li>
-        <li>{{list.last_name}}</li>
-        <li>{{list.avatar}}</li>
+        <li>{{ list.id }}</li>
+        <li>{{ list.email }}</li>
+        <li>{{ list.first_name }}</li>
+        <li>{{ list.last_name }}</li>
+        <li><img [src]="list.avatar" alt="Lender Image" /></li>
       </ul>
     </div>
-</div>
+    <footer class="bg-color">Your Number 1 money market</footer>
+  </div>
 </div>

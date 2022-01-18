@@ -10,13 +10,13 @@ import { Playlist } from "./playlist";
 })
 export class PlaylistService {
   private playListUrl = "https://reqres.in/api/users";
-  data: Playlist[]
+
   constructor(private http: HttpClient) {}
 
   getPlaylist():Observable<Playlist[]> {
-    return this.http.get<Playlist[]>(this.playListUrl).pipe(
-      map(data=> {return this.data=data}),
-      catchError(this.handleError)
+    return this.http.get<Playlist[]>(this.playListUrl ).pipe(
+      map((response) => <Playlist[]>response),
+      catchError(this.handleError),
     );
 }
 
