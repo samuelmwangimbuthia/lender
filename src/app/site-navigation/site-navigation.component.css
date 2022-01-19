@@ -1,0 +1,16 @@
+.nav {
+  background-color: #d9dddc;
+}
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+}
+
+.fa-twitter {
+  background: #55ACEE;
+  color: white;
+}
+address {
+  display: block;
+  font-style: italic;
+}

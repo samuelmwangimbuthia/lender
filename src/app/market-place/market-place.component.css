@@ -1,1 +1,15 @@
+.to-right {
+  color: rgb(68, 170, 47);
+}
 
+.to-right:link{
+  color:#ff0000
+}
+
+a:visited{
+  color:#006eff
+}
+
+a:hover{
+  color: #ff0000;
+}

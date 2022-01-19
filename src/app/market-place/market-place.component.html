@@ -1,14 +1,20 @@
 <div class="container">
   <div class="inner-container">
-    <div class="header bg-color">Lender</div>
-      <app-site-navigation class="nav bg-color"></app-site-navigation>
-    <div class="listings3 bg-color" *ngFor="let list of _playList.data">
+    <div class="header bg-color">
+      <h1>Lender</h1>
+      <span><a href="/"routerLink= '/start' class="to-right">Start Lending Today</a> </span>
+    </div>
+    <div class="title">Featured Offers</div>
+    <app-site-navigation class="nav bg-color"></app-site-navigation>
+    <div class="listings bg-color" *ngFor="let list of _playList.data">
       <ul>
-        <li>{{ list.id }}</li>
-        <li>{{ list.email }}</li>
-        <li>{{ list.first_name }}</li>
-        <li>{{ list.last_name }}</li>
+        <li>#{{ list.id }}</li>
+        <li>Email:{{ list.email }}</li>
+        <li>{{ list.first_name + " " + list.last_name }}</li>
         <li><img [src]="list.avatar" alt="Lender Image" /></li>
+        <li>Offer Amount: Kshs 20,000</li>
+        <li>Rate per Month: 20%</li>
+        <li class="to-right">See More</li>
       </ul>
     </div>
     <footer class="bg-color">Your Number 1 money market</footer>
