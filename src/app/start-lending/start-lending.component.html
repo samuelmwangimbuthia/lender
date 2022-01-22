@@ -1,21 +1,31 @@
-
 <h1>Start your Lending Business Today</h1>
 <h2>Submit a Request</h2>
-  <form>
-      <p><label>First Name <input type="text"></label></p>
-      <p><label>Last Name <input type="text"></label></p>
-      <p><label>Phone Number <input type="text"></label></p>
-      <p><label>Email <input type="email"></label></p>
-      <fieldset>
-          <legend>Preferred Collateral:</legend>
-          <label><input type="radio" name="none">None</label>
-          <label><input type="radio" name="Logbook">Logbook</label>
-          <label><input type="radio" name="TitleDeed">Title Deed</label>
-      </fieldset>
-     <p><label>Amount: <input type="number"></label></p>
-      <p><label>Comment</label></p>
-      <textarea></textarea>
-      <p><button type="submit"> Submit Request</button></p>
-      <p><small><strong>When you submit the form you will be redirected to <em>Paypal.</em></strong></small></p>
-  </form>
+<form [formGroup]="onboardingFormGroup">
+  <label for="firstName">First Name <input formControlName="firstName" type="text" /></label>
+  <label for="lastName">Last Name <input formControlName="lastName"  type="text" /></label>
+  <label for="phoneNumber">Phone Number <input formControlName="phoneNumber"  type="text" /></label>
 
+  <label for="email">Email <input formControlName="email" type="email" /></label>
+
+  <fieldset>
+    <legend>Preferred Collateral:</legend>
+    <label for="none"><input formControlName="none" type="radio" name="none" />None</label>
+    <label for="logbook"><input formControlName="logbook" type="radio" name="logbook" />Logbook</label>
+    <label for="titleDeed"><input formControlName="titleDeed"  type="radio" name="titleDeed" />Title Deed</label>
+  </fieldset>
+
+  <label for="amount">Amount: <input formControlName="amount" type="number" /></label>
+
+  <!--    <label>Comment</label>
+      <textarea></textarea>-->
+<!--the button passes form data to the onboard-lender component for creating a paypal account-->
+  <button type="submit" (click)="createNewLender(onboardingFormGroup.value)">Submit Request</button>
+
+
+  <small>
+    <strong
+      >When you submit the form you will be redirected to
+      <em>Paypal.</em>
+    </strong>
+  </small>
+</form>

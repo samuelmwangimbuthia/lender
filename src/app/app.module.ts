@@ -9,11 +9,12 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { RouterModule, Routes } from '@angular/router';
 import { StartLendingComponent } from './start-lending/start-lending.component';
 import { OnboardLenderComponent } from './onboard-lender/onboard-lender.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const appRoutes:Routes = [
   {path: 'market', component: MarketPlaceComponent},
   {path: 'home', component: WelcomePageComponent},
-  {path: 'start', component:StartLendingComponent},
+  {path: 'start', component:OnboardLenderComponent},
   {path: '', redirectTo: 'market', pathMatch: 'full'},
 
 ]
@@ -31,7 +32,9 @@ const appRoutes:Routes = [
   imports: [
     BrowserModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
