@@ -8,7 +8,7 @@ import { PlaylistService } from "../playlist.service";
   styleUrls: ["./market-place.component.css"],
 })
 export class MarketPlaceComponent implements OnInit {
-  _playList: Playlist[] = []; //never gets assigned here
+  _playList: Playlist[] = [];
 
   errorMessage;
   constructor(private playListService: PlaylistService) {}
@@ -16,7 +16,6 @@ export class MarketPlaceComponent implements OnInit {
   ngOnInit() {
     this.playListService.getPlaylist().subscribe({
       next: (playList) => { this._playList = playList;
-        console.log(this._playList['data']); // am able to log the data but its never assigned to my _playList variable
       }
     });
   }

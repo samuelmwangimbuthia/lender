@@ -1,21 +1,34 @@
+<div class="container">
+  <h1>Start your Lending Business Today</h1>
+  <h2>Submit a Request</h2>
+  <form [formGroup]="onboardingFormGroup" class="form-group">
+    <label for="firstName" class="form-label">First Name </label><input formControlName="firstName" type="text" class="form-control col-sm-6"/>
+    <label for="lastName" class="form-label">Last Name </label><input formControlName="lastName"  type="text" class="form-control" />
+    <label for="phoneNumber" class="form-label">Phone Number</label> <input formControlName="phoneNumber"  type="text" class="form-control" />
 
-<h1>Start your Lending Business Today</h1>
-<h2>Submit a Request</h2>
-  <form [formGroup] = "onboardingForm" >
-      <p><label for="firstName">First Name <input type="text" formControlName="firstName" [formControl]="firstNameControl"></label></p>
-      <p><label>Last Name <input type="text" formControlName="lastName" [formControl] ="lastNameControl"></label></p>
-      <p><label>Phone Number <input type="text" formControlName="phoneNumber" [formControl]="phoneNumberControl"></label></p>
-      <p><label>Email <input type="email" formControlName="email" [formControl]="emailControl"></label></p>
-      <fieldset>
-          <legend>Preferred Collateral:</legend>
-          <label><input type="radio" formControlName="none" [formControl]="noneControl">None</label>
-          <label><input type="radio" formControlName="logbook" [formControl]="logbookControl">Logbook</label>
-          <label><input type="radio" formControlName="titleDeed" [formControl]="titleDeedControl">Title Deed</label>
-      </fieldset>
-     <p><label>Amount: <input type="number" formControlName="amount" [formControl]="amountControl"></label></p>
-      <!--<p><label>Comment</label></p>
-      <textarea></textarea> -->
-      <p><button type="submit" (click) = "login(onboardingForm)"> Submit Request</button></p>
-      <p><small><strong>When you submit the form you will be redirected to <em>Paypal.</em></strong></small></p>
+
+    <label for="email" class="form-label">Email </label><input formControlName="email" type="email" class="form-control" />
+
+    <fieldset class="form-group">
+      <legend>Preferred Collateral:</legend>
+      <label for="none" class="form-check-label"><input formControlName="none" type="radio" name="none" class="form-check-input" />None</label>
+      <label for="logbook" class="form-check-label"><input formControlName="logbook" type="radio" name="logbook" class="form-check-input"/>Logbook</label>
+      <label for="titleDeed" class="form-check-label"><input formControlName="titleDeed"  type="radio" name="titleDeed" class="form-check-input" />Title Deed</label>
+    </fieldset>
+
+    <label for="amount">Amount: <input formControlName="amount" type="number" class="form-control"/></label>
+<div class="form-group">
+  <label for="comment">Comment</label>
+    <textarea id="comment" name="comment" class="form-control"></textarea>
+</div>
+  <!--the button passes form data to the onboard-lender component for creating a paypal account-->
+    <button type="submit" (click)="createNewLender(onboardingFormGroup.value)" class="btn btn-primary">Submit Request</button>
+
+    <small>
+      <strong
+        >When you submit the form you will be redirected to
+        <em>Paypal.</em>
+      </strong>
+    </small>
   </form>
-
+</div>

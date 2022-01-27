@@ -8,12 +8,16 @@ import { SiteNavigationComponent } from './site-navigation/site-navigation.compo
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { RouterModule, Routes } from '@angular/router';
 import { StartLendingComponent } from './start-lending/start-lending.component';
+import { OnboardLenderComponent } from './onboard-lender/onboard-lender.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UserSettingsComponent } from './user-settings/user-settings.component';
+//import { ButtonsModule } from 'ngx-bootstrap/buttons';
 
 const appRoutes:Routes = [
   {path: 'market', component: MarketPlaceComponent},
   {path: 'home', component: WelcomePageComponent},
-  {path: 'start', component:StartLendingComponent},
+  {path: 'start', component:OnboardLenderComponent},
+  {path: 'settings', component:UserSettingsComponent},
   {path: '', redirectTo: 'market', pathMatch: 'full'},
 
 ]
@@ -26,13 +30,17 @@ const appRoutes:Routes = [
     SiteNavigationComponent,
     WelcomePageComponent,
     StartLendingComponent,
+    OnboardLenderComponent,
+    UserSettingsComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
     FormsModule,
-    ReactiveFormsModule
+
+    ReactiveFormsModule,
+   // ButtonsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

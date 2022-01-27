@@ -12,12 +12,15 @@ lendersUrl = 'https://api-m.sandbox.paypal.com';
 httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json',
-    Authorization: 'A21AAJ1XsBokwEnqmupbN8c9ZFZ59L9fQwKfy1mQnzn869vuT15Mr9GSAEeD9Ll5ikGCxXhtVbi-zSBzfrXd3nK4ft6jlwpJg'
+
+    Authorization: "A21AAJoG_zJpSdz60N9_HSTlwnrXMoK82M9wQ-TGe9xRS3b8_J0elMFOn-IRJfZgeClsY0Lv4b9LmLURODBqxw5JR98utfGGg"
   })
 };
 
   constructor(private http: HttpClient) { }
-  /** POST: onboard a new lender */
+  /** POST: onboard a new lender
+   * the parameter lender contains data collected through the form
+   */
 onboardLender(lender: Lender) {
   return this.http.post(this.lendersUrl, lender, this.httpOptions)
     .pipe(
