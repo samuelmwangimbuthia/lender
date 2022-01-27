@@ -7,8 +7,9 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./start-lending.component.css']
 })
 export class StartLendingComponent implements OnInit {
-  @Output() sendLenderData:EventEmitter<{}> = new EventEmitter<{}>()
-onboardingFormGroup:FormGroup
+  // linking the child component to the parent
+  @Output() sendLenderData: EventEmitter<{}> = new EventEmitter<{}>()
+  onboardingFormGroup: FormGroup
   constructor() { }
 
   ngOnInit() {
@@ -27,14 +28,14 @@ onboardingFormGroup:FormGroup
     // set properties on each of the controls
     this.onboardingFormGroup = new FormGroup(
       {
-        firstName :  firstName,
-         lastName : lastName,
-         phoneNumber: phoneNumber,
-        email : email,
-        none : none,
-        logbook : logbook,
-        titleDeed : titleDeed,
-        amount  : amount,
+        firstName: firstName,
+        lastName: lastName,
+        phoneNumber: phoneNumber,
+        email: email,
+        none: none,
+        logbook: logbook,
+        titleDeed: titleDeed,
+        amount: amount,
       }
     )
 
@@ -42,7 +43,7 @@ onboardingFormGroup:FormGroup
   /*createNewLender(data){
     console.log(data)
   } */
-  createNewLender(data){
+  createNewLender(data) {
     this.sendLenderData.emit(data)
 
   }
