@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder, Validators  } from '@angular/forms';
 
 @Component({
   selector: 'app-start-lending',
@@ -10,41 +10,41 @@ export class StartLendingComponent implements OnInit {
   // linking the child component to the parent
   @Output() sendLenderData: EventEmitter<{}> = new EventEmitter<{}>()
   onboardingFormGroup: FormGroup
-  constructor() { }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
 
-    // controls for all onboarding form input fields
-    let firstName = new FormControl();
-    let lastName = new FormControl();
-    let phoneNumber = new FormControl();
-    let email = new FormControl();
-    let none = new FormControl();
-    let logbook = new FormControl();
-    let titleDeed = new FormControl();
-    let amount = new FormControl();
+    //set controls for all onboarding form input fields
+    this.onboardingFormGroup = this.fb.group({
+      firstName: ['',[Validators.pattern, Validators.minLength(1)]],
+      lastName: ['',[Validators.pattern, Validators.minLength(1)]],
+      phoneNumber: Number,
+      email: ['', [Validators.required, Validators.email]],
+      amount: Number,
+      collateral: '',
+    })
 
-    //to add all these controls to the onboarding form,
-    // set properties on each of the controls
-    this.onboardingFormGroup = new FormGroup(
-      {
-        firstName: firstName,
-        lastName: lastName,
-        phoneNumber: phoneNumber,
-        email: email,
-        none: none,
-        logbook: logbook,
-        titleDeed: titleDeed,
-        amount: amount,
-      }
-    )
 
-  }
-  /*createNewLender(data){
-    console.log(data)
-  } */
-  createNewLender(data) {
-    this.sendLenderData.emit(data)
+this.populateLendersData();
+}
 
-  }
+ //the method shall be reused by the borrower and lender component to prepopulate the form with
+  //with the saved data
+populateLendersData(){
+  this.onboardingFormGroup.setValue({
+    firstName: 'Samuel',
+      lastName: 'Mwangi',
+      phoneNumber: 729782466,
+      email: 'mbuthia.jsamuel@gmail.com',
+      amount: 20000,
+      collateral: 'logbook'
+  })
+}
+/*createNewLender(data){
+  console.log(data)
+} */
+createNewLender(data) {
+  this.sendLenderData.emit(data)
+
+}
 }

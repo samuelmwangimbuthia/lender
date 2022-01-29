@@ -2,48 +2,74 @@
   <h1>Start your Lending Business Today</h1>
   <h2>Submit a Request</h2>
   <form [formGroup]="onboardingFormGroup" class="form-group">
-    <label for="firstName" class="form-label">First Name </label><input formControlName='firstName' type="text"
-      class="form-control" required maxlength="3"
-      [ngClass]="{'alert alert-danger': (onboardingFormGroup.get('firstName').touched || onboardingFormGroup.get('firstName').dirty && !onboardingFormGroup.get('firstName').valid ) }" />
-    <label for="lastName" class="form-label">Last Name </label><input formControlName="lastName" type="text"
-      class="form-control" />
-    <label for="phoneNumber" class="form-label">Phone Number</label> <input formControlName="phoneNumber" type="text"
-      class="form-control" />
+    <label for="firstName" class="form-label">First Name </label
+    ><input
+      formControlName="firstName"
+      type="text"
+      class="form-control"
+    />
+   <!-- <span [ngClass] =  "['alert', 'alert-danger']
+   onboardingFormGroup.get('firstName').touched ||
+   onboardingFormGroup.get('firstName').dirty &&
+     !onboardingFormGroup.get('firstName').valid">
+    <span >Name is required</span>
+   </span> -->
+    <label for="lastName" class="form-label">Last Name </label
+    ><input formControlName="lastName" type="text" class="form-control" />
+    <label for="phoneNumber" class="form-label">Phone Number</label>
+    <input formControlName="phoneNumber" type="text" class="form-control" />
 
+    <label for="email" class="form-label">Email </label
+    ><input formControlName="email" type="email" class="form-control" />
 
-    <label for="email" class="form-label">Email </label><input formControlName="email" type="email"
-      class="form-control" />
-
-    <fieldset class="form-group">
+    <fieldset class="form-check">
       <legend>Preferred Collateral:</legend>
-      <label for="none" class="form-check-label"><input formControlName="none" type="radio" name="none"
-          class="form-check-input" />None</label>
-      <label for="logbook" class="form-check-label"><input formControlName="logbook" type="radio" name="logbook"
-          class="form-check-input" />Logbook</label>
-      <label for="titleDeed" class="form-check-label"><input formControlName="titleDeed" type="radio" name="titleDeed"
-          class="form-check-input" />Title Deed</label>
+      <input type="radio" formControlname="collateral"  class="form-check-input" />
+      <label for="collateral" class="form-check-label">None</label>
+
+      <input
+          type="radio"
+          formControlname="collateral"
+          class="form-check-input"
+        />
+      <label for="collateral"  class="form-check-label"
+        >Logbook</label
+      >
+      <input type="radio" formControlname="collateral"  class="form-check-input" />
+      <label for="collateral"  class="form-check-label"
+        >Title
+        Deed</label
+      >
     </fieldset>
 
-    <label for="amount">Amount: <input formControlName="amount" type="number" class="form-control" /></label>
+    <label for="amount"
+      >Amount:
+      <input formControlName="amount" type="number" class="form-control"
+    /></label>
     <div class="form-group">
       <label for="comment">Comment</label>
       <textarea id="comment" name="comment" class="form-control"></textarea>
     </div>
     <!--the button passes form data to the onboard-lender component for creating a paypal account-->
-    <button type="submit" [disabled]="!onboardingFormGroup.valid" (click)="createNewLender(onboardingFormGroup.value)"
-      class="btn btn-primary">Submit Request</button>
+    <button
+      type="submit"
+      [disabled]="!onboardingFormGroup.valid"
+      (click)="createNewLender(onboardingFormGroup.value)"
+      class="btn btn-primary"
+    >
+      Submit Request
+    </button>
 
     <small>
-      <strong>When you submit the form you will be redirected to
+      <strong
+        >When you submit the form you will be redirected to
         <em>Paypal.</em>
       </strong>
     </small>
   </form>
-  <br>Dirty {{onboardingFormGroup.dirty}}
-  <br>Pristine {{onboardingFormGroup.pristine}}
-  <br>touched {{onboardingFormGroup.touched}}
-  <br>untouched {{onboardingFormGroup.untouched}}
-  <br>valid {{onboardingFormGroup.valid}}
-  <br>{{onboardingFormGroup.value | json}}
-
+  <br />Dirty {{ onboardingFormGroup.dirty }} <br />Pristine
+  {{ onboardingFormGroup.pristine }} <br />touched
+  {{ onboardingFormGroup.touched }} <br />untouched
+  {{ onboardingFormGroup.untouched }} <br />valid
+  {{ onboardingFormGroup.valid }} <br />{{ onboardingFormGroup.value | json }}
 </div>
