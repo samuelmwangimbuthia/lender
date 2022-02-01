@@ -3,17 +3,20 @@
   <h2>Submit a Request</h2>
   <form [formGroup]="onboardingFormGroup" class="form-group">
     <label for="firstName" class="form-label">First Name </label
-    ><input
-      formControlName="firstName"
-      type="text"
-      class="form-control"
-    />
-   <!-- <span [ngClass] =  "['alert', 'alert-danger']
-   onboardingFormGroup.get('firstName').touched ||
-   onboardingFormGroup.get('firstName').dirty &&
-     !onboardingFormGroup.get('firstName').valid">
-    <span >Name is required</span>
-   </span> -->
+    ><input formControlName="firstName" type="text" class="form-control" />
+
+    <div
+      [ngClass]="{
+        'alert-danger':
+          onboardingFormGroup.get('firstName').touched ||
+          (onboardingFormGroup.get('firstName').dirty &&
+            !onboardingFormGroup.get('firstName').valid)
+      }"
+    >
+      <span *ngIf="onboardingFormGroup.get('firstName').errors?.required"
+        >Name is required</span
+      >
+    </div>
     <label for="lastName" class="form-label">Last Name </label
     ><input formControlName="lastName" type="text" class="form-control" />
     <label for="phoneNumber" class="form-label">Phone Number</label>
@@ -24,23 +27,85 @@
 
     <fieldset class="form-check">
       <legend>Preferred Collateral:</legend>
-      <input type="radio" formControlname="collateral"  class="form-check-input" />
-      <label for="collateral" class="form-check-label">None</label>
-
-      <input
-          type="radio"
-          formControlname="collateral"
-          class="form-check-input"
-        />
-      <label for="collateral"  class="form-check-label"
-        >Logbook</label
-      >
-      <input type="radio" formControlname="collateral"  class="form-check-input" />
-      <label for="collateral"  class="form-check-label"
-        >Title
-        Deed</label
-      >
+      <input type="radio" formControlname="collateral" name="collateral" value="none" (click)="selectCollateral('none')"/>
+      <label for="collateral" class="form-check-label" >None</label>
+      <input type="radio" formControlname="collateral" name="collateral" value="logbook" (click) = "selectCollateral('logbook')"/>
+      <label for="collateral" class="form-check-label">Logbook</label>
+      <input type="radio" formControlname="collateral" name="collateral" value="titleDeed" (click) = "selectCollateral('titleDeed')"/>
+      <label for="collateral" class="form-check-label">Title Deed</label>
     </fieldset>
+
+    <!--capture vehicle details-->
+    <div *ngIf="onboardingFormGroup.get('collateral').value === 'titleDeed'">
+      <div class="form-group">
+        <label for="landRegistrationNumber"
+          >TITLE NUMBER (CAPITAL LETTERS ONLY)</label
+        >
+        <input
+        id="landRegistrationNumber"
+        type="text"
+        class="form-control"
+      />
+        <label for="landSize"
+          >Size of Land</label
+        >
+        <input
+        id="landSize"
+        type="number"
+        class="form-control"
+      />
+        <label for="landOwnerName"
+          >Name of the owner</label
+        >
+        <input
+        id="landOwnerName"
+        type="text"
+        class="form-control"
+      />
+        <label for="identificationNumber"
+          >National ID Number</label
+        >
+        <input
+        id="identificationNumber"
+        type="number"
+        class="form-control"
+      />
+      <select class="form-select" aria-label="Default select example">
+        <option selected>Type of ownership</option>
+        <option value="1">Sectional</option>
+        <option value="2">Leasehold</option>
+        <option value="3">Freehold</option>
+      </select>
+
+        <select class="form-select" aria-label="Default select example">
+          <option selected>Present encumbrances</option>
+          <option value="1">Mortgage</option>
+          <option value="2">Loans</option>
+          <option value="3">Dispute</option>
+        </select>
+      </div>
+    </div>
+
+    <!--capture logbook details-->
+    <div *ngIf="onboardingFormGroup.get('collateral').value === 'logbook'">
+      <div class="form-group">
+        <label for="vehicleRegistrationNumber"
+          >Motor Vehicle Registration Number(CAPITAL LETTERS ONLY)</label
+        >
+        <input
+          id="vehicleRegistrationNumber"
+          type="text"
+          class="form-control"
+        />
+
+        <select class="form-select" aria-label="Default select example">
+          <option selected>CHOOSE vEHICLE MAKE</option>
+          <option value="1">VAN/PICKUP</option>
+          <option value="2">LORRY/PICKUP</option>
+          <option value="3">SALOON</option>
+        </select>
+      </div>
+    </div>
 
     <label for="amount"
       >Amount:
