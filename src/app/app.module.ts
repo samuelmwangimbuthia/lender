@@ -18,7 +18,7 @@ const appRoutes:Routes = [
   {path: 'home', component: WelcomePageComponent},
   {path: 'start', component:OnboardLenderComponent},
   {path: 'settings', component:UserSettingsComponent},
-  {path: '', redirectTo: 'market', pathMatch: 'full'},
+  {path: '', redirectTo: 'home', pathMatch: 'full'},
 
 ]
 

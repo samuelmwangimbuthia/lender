@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { Playlist } from "../playlist";
-import { PlaylistService } from "../playlist.service";
+import { LendersOrBorrowers } from "../ILendersOrBorrowers";
+import { LenderOrBorrowersService} from "../lendersOrBorrowers.service";
 
 @Component({
   selector: "app-market-place",
@@ -8,14 +8,14 @@ import { PlaylistService } from "../playlist.service";
   styleUrls: ["./market-place.component.css"],
 })
 export class MarketPlaceComponent implements OnInit {
-  _playList: Playlist[] = [];
+  _lenders: LendersOrBorrowers[] = [];
 
   errorMessage;
-  constructor(private playListService: PlaylistService) {}
+  constructor(private lender: LenderOrBorrowersService) {}
 
   ngOnInit() {
-    this.playListService.getPlaylist().subscribe({
-      next: (playList) => { this._playList = playList;
+    this.lender.getLenderOrBorrower().subscribe({
+      next: (lenders) => { this._lenders = lenders;
       }
     });
   }

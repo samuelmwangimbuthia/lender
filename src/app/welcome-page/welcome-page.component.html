@@ -1,8 +1,47 @@
 <div class="container">
-  <div class="inner-container">
-    <div class="header bg-color">Lender</div>
-      <app-site-navigation class="nav "></app-site-navigation>
-      <div class="welcome " id="gradient">Welcome to lender </div>
+  <div >
+    <div class="welcome-header">
+      <div class="logo">Lender</div>
+      <button type="button" class="btn btn-link to-right">Login/Sign Up</button>
+    </div>
+    <app-site-navigation class="navigation"></app-site-navigation>
+
+    <div class="welcome" id="gradient">
+      <h3 class=" lending-heading heading">
+        Starting Your Lending Business Shouldn't Be So Hard
+      </h3>
+      <p class=" lending-body">
+        You can start your lending business with as little as 1000 shillings.
+        All you need to do is open an account with us and reach our wide market
+        of borrowers.
+        <button>Start Lending</button>
+      </p>
+      <div class="lendig-img"></div>
+
+      <h3 class="borrowing-heading heading">
+        Obtaining funds should be as easy
+        as ABC
+      </h3>
+      <p class="borrowing-body">
+        view our wide range of lenders by following this link.
+        <button>Borrow Now</button>
+      </p>
+      <div class="borrowing-img"></div>
+    </div>
+    <div >Featured Offers</div>
+    <div class="featured">
+    <div class=" bg-color " *ngFor="let list of _featuredLenders.data.slice(0,4)">
+      <ul >
+        <li>#{{ list.id }}</li>
+        <li>Email:{{ list.email }}</li>
+        <li>{{ list.first_name + " " + list.last_name }}</li>
+        <li><img [src]="list.avatar" alt="Lender Image" /></li>
+        <li>Offer Amount: Kshs 20,000</li>
+        <li>Rate per Month: 20%</li>
+        <li class="to-right">See More</li>
+      </ul>
+    </div>
+  </div>
     <footer class="bg-color">Your Number 1 money market</footer>
   </div>
 </div>
