@@ -1,6 +1,6 @@
 .container{
   padding-left: 1em;
-  background-color: rgb(192, 226, 192);
+  /* background-color: rgb(192, 226, 192); */
 }
 
 .welcome {
@@ -10,6 +10,8 @@
   grid-gap: 0.5em;
   font-family: helvetica,"Times New Roman", Times, serif;
   text-align: center;
+  /* background: url(/assets/images/pexels-jopwell-2422278.jpg);
+  background-size: contain; */
 }
 
 .lending-heading {
@@ -26,7 +28,9 @@
 .lendig-img {
   grid-column: 2/3;
   grid-row: 1/3;
-  background: url(/assets/images.jpg);
+
+ /* background: url(/assets/images/pexels-jopwell-2422278.jpg); */
+
 
 }
 .borrowing-heading {
@@ -43,7 +47,7 @@
 .borrowing-img {
   grid-column: 1/2;
   grid-row: 3/5;
-  background: url(/assets/borrowing.jpg);
+  /* background: url(/assets/images/borrowing.jpg); */
   /* background-size: cover; */
 }
 
