@@ -111,23 +111,23 @@
               formControlName="landRegistrationNumber"
               [ngClass]="{
                 'is-invalid':
-                  onboardingFormGroup.get('landRegistrationNumber').touched ||
-                  (onboardingFormGroup.get('landRegistrationNumber').dirty &&
-                    !onboardingFormGroup.get('landRegistrationNumber').valid)
+                  titleDeed.get('landRegistrationNumber').touched ||
+                  (titleDeed.get('landRegistrationNumber').dirty &&
+                    !titleDeed.get('landRegistrationNumber').valid)
               }"
             />
 
             <div class="invalid-feedback">
-              <span *ngIf="onboardingFormGroup.get('landRegistrationNumber').errors?.required"
+              <span *ngIf="titleDeed.get('landRegistrationNumber').errors?.required"
               >Please enter a valid title number</span>
             </div>
 
-            <label for="landSize">Size of Land</label>
-            <input id="landSize" formControlName="landSize" type="number" class="form-control" />
-            <label for="landOwnerName" >Name of the owner</label>
-            <input id="landOwnerName" formControlName="landOwnerName" type="text" class="form-control" />
-            <label for="identificationNumber" >National ID Number</label>
-            <input id="identificationNumber" type="number" class="form-control" formControlName="identificationNumber" />
+            <label attr.for="{{'landSize'+ i}}">Size of Land</label>
+            <input id="{{'landSize'+ i}}" formControlName="landSize" type="number" class="form-control" />
+            <label for="{{'landOwnerName'+ i}}" >Name of the owner</label>
+            <input id="{{'landOwnerName'+ i}}" formControlName="landOwnerName" type="text" class="form-control" />
+            <label for="{{'identificationNumber'+ i}}" >National ID Number</label>
+            <input id="{{'identificationNumber'+ i}}" type="number" class="form-control" formControlName="identificationNumber" />
           </div>
           <select class="form-select" aria-label="Default select example">
             <option selected>Type of ownership</option>

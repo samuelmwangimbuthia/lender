@@ -49,9 +49,11 @@ export class StartLendingComponent implements OnInit {
   onboardingFormGroup: FormGroup;
 
   //create a property for the titleDeed array in form Model
+  debugger
   get titleDeeds(): FormArray{
-    return <FormArray> this.onboardingFormGroup.get('titleDeed')
+    return <FormArray> this.onboardingFormGroup.get('titleDeeds')
   }
+
   constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
@@ -104,11 +106,12 @@ populateLendersData(){
   // sets validators for the selected button
   selectCollateral(security: string): void {
     //const collateralControl = this.onboardingFormGroup.get("collateral");
+    //TO DO Fix getting reference to the controls in the array group
     const vehicleRegistrationNumber = this.onboardingFormGroup.get(
       "vehicleRegistrationNumber"
     );
     const landRegistrationNumber = this.onboardingFormGroup.get(
-      "landRegistrationNumber"
+      "titleDeed[i].landRegistrationNumber"
     );
     if (security === "logbook") {
       vehicleRegistrationNumber.setValidators(Validators.required);
