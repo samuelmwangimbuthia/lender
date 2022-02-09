@@ -10,7 +10,8 @@ import { LendersOrBorrowers } from "./ILendersOrBorrowers";
   providedIn: "root",
 })
 export class LenderOrBorrowersService {
-  private lendersOrBorrowersUrl = "https://reqres.in/api/users";
+  // private lendersOrBorrowersUrl = "http://reqres.in/api/users";
+  private lendersOrBorrowersUrl = "http://reqres.in/api/users";
 
   constructor(private http: HttpClient) {}
 
