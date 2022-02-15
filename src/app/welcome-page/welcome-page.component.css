@@ -10,8 +10,8 @@
   font-family: helvetica,"Times New Roman", Times, serif;
   height: fit-content;
 
-  
-  
+
+
   /* background: url(/assets/images/pexels-jopwell-2422278.jpg);
   background-size: contain; */
 }
@@ -34,7 +34,7 @@ the flex items */
 .lendig-img {
   grid-column: 2/3;
   grid-row: 1/2;
-  
+
  /* background: url(/assets/images/pexels-jopwell-2422278.jpg); */
 
 
@@ -59,7 +59,7 @@ img{
   font-size: 2em;
   font-weight: 700;
   color: #f7a944;
-} 
+}
 
 
 /* display list items inline */
