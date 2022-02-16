@@ -1,0 +1,224 @@
+<div class="container">
+  <app-site-navigation class="navigation bg-color"></app-site-navigation>
+  <h1>Start your Lending Business Today</h1>
+  <h2>Submit a Request</h2>
+  <form [formGroup]="onboardingFormGroup" class="form-group">
+    <label for="firstName" class="form-label">First Name </label
+    ><input
+      formControlName="firstName"
+      type="text"
+      class="form-control"
+      [ngClass]="{
+        'is-invalid':
+          onboardingFormGroup.get('firstName').touched &&
+          onboardingFormGroup.get('firstName').dirty &&
+            !onboardingFormGroup.get('firstName').valid
+      }"
+    />
+
+    <div class="invalid-feedback">
+      <span *ngIf="onboardingFormGroup.get('firstName').errors?.required"
+        >Name is required</span
+      >
+    </div>
+    <label for="lastName" class="form-label">Last Name </label
+    ><input formControlName="lastName" type="text" class="form-control" />
+    <label for="phoneNumber" class="form-label">Phone Number</label>
+    <input formControlName="phoneNumber" type="text" class="form-control" />
+    <div formGroupName="emailGroup" class="form-group">
+      <label for="email" class="form-label">Email </label
+      ><input
+        id="email"
+        formControlName="email"
+        type="email"
+        name="email"
+        class="form-control"
+        [ngClass]="{
+          'is-invalid':
+            onboardingFormGroup.get('emailGroup').errors ||
+            (onboardingFormGroup.get('emailGroup.email').touched &&
+              onboardingFormGroup.get('emailGroup.email').dirty &&
+                !onboardingFormGroup.get('emailGroup.email').valid)
+        }"
+      />
+      <div class="invalid-feedback">
+        <span *ngIf="onboardingFormGroup.get('emailGroup.email').errors?.email"
+          >Please enter a valid email address</span
+        >
+      </div>
+
+      <label for="email" class="form-label">Confirm Email </label
+      ><input
+        formControlName="confirmEmail"
+        type="email"
+        class="form-control"
+        [ngClass]="{
+          'is-invalid':
+            onboardingFormGroup.get('emailGroup').errors ||
+            (onboardingFormGroup.get('emailGroup.confirmEmail').touched &&
+              onboardingFormGroup.get('emailGroup.confirmEmail').dirty &&
+                !onboardingFormGroup.get('emailGroup.confirmEmail').valid)
+        }"
+      />
+      <div class="invalid-feedback">
+        <span
+          *ngIf="
+            onboardingFormGroup.get('emailGroup.confirmEmail').errors?.required
+          "
+          >Please confrim your email address</span
+        >
+        <span *ngIf="onboardingFormGroup.get('emailGroup').errors?.match"
+          >Please confrim your email address</span
+        >
+      </div>
+    </div>
+
+    <fieldset class="form-check">
+      <legend>Preferred Collateral:</legend>
+      <input
+        type="radio"
+        formControlName="collateral"
+        name="collateral"
+        value="none"
+        (click)="selectCollateral('none')"
+      />
+      <label for="collateral" class="form-check-label">None</label>
+      <input
+        type="radio"
+        formControlName="collateral"
+        name="collateral"
+        value="logbook"
+      />
+      <label for="collateral" class="form-check-label">Logbook</label>
+      <input
+        type="radio"
+        formControlName="collateral"
+        name="collateral"
+        value="titleDeed"
+      />
+      <label for="collateral" class="form-check-label">Title Deed</label>
+    </fieldset>
+
+    <!--capture title deed details-->
+    <div *ngIf="onboardingFormGroup.get('collateral').value === 'titleDeed'">
+        <div formArrayName = "titleDeeds" *ngFor="let titleDeed of titleDeeds.controls; let i = index">
+          <div [formGroupName] = 'i'>
+            <label attr.for="{{'landRegistrationNumber'+ i}}">TITLE NUMBER (CAPITAL LETTERS ONLY)</label>
+            <input
+              id="{{'landRegistrationNumber'+ i}}"
+              type="text"
+              class="form-control"
+              formControlName="landRegistrationNumber"
+              [ngClass]="{
+                'is-invalid':
+                  titleDeed.get('landRegistrationNumber').touched ||
+                  (titleDeed.get('landRegistrationNumber').dirty &&
+                    !titleDeed.get('landRegistrationNumber').valid)
+              }"
+            />
+
+            <div class="invalid-feedback">
+              <span *ngIf="titleDeed.get('landRegistrationNumber').errors?.required"
+              >Please enter a valid title number</span>
+            </div>
+
+            <label attr.for="{{'landSize'+ i}}">Size of Land</label>
+            <input id="{{'landSize'+ i}}" formControlName="landSize" type="number" class="form-control" />
+            <label for="{{'landOwnerName'+ i}}" >Name of the owner</label>
+            <input id="{{'landOwnerName'+ i}}" formControlName="landOwnerName" type="text" class="form-control" />
+            <label for="{{'identificationNumber'+ i}}" >National ID Number</label>
+            <input id="{{'identificationNumber'+ i}}" type="number" class="form-control" formControlName="identificationNumber" />
+          </div>
+          <select class="form-select" aria-label="Default select example">
+            <option selected>Type of ownership</option>
+            <option value="1">Sectional</option>
+            <option value="2">Leasehold</option>
+            <option value="3">Freehold</option>
+          </select>
+
+          <select class="form-select" aria-label="Default select example">
+            <option selected>Present encumbrances</option>
+            <option value="1">Mortgage</option>
+            <option value="2">Loans</option>
+            <option value="3">Dispute</option>
+          </select>
+        </div>
+        <button type="button" (click)= buildTitleDeed() >Add Another Title</button>
+    </div>
+
+    <!--capture logbook details-->
+    <div *ngIf="onboardingFormGroup.get('collateral').value === 'logbook'">
+      <div class="form-group">
+        <label for="vehicleRegistrationNumber"
+          >Motor Vehicle Registration Number(CAPITAL LETTERS ONLY)</label
+        >
+        <input
+          id="vehicleRegistrationNumber"
+          type="text"
+          class="form-control"
+          formControlName="vehicleRegistrationNumber"
+          [ngClass]="{
+            'is-invalid':
+              onboardingFormGroup.get('vehicleRegistrationNumber').touched ||
+              (onboardingFormGroup.get('vehicleRegistrationNumber').dirty &&
+                !onboardingFormGroup.get('vehicleRegistrationNumber').valid)
+          }"
+        />
+
+        <div class="invalid-feedback">
+          <span *ngIf="onboardingFormGroup.get('vehicleRegistrationNumber').errors?.required"
+          >Please enter a valid Registration Number</span>
+        </div>
+
+        <select class="form-select" aria-label="Default select example">
+          <option selected>CHOOSE vEHICLE MAKE</option>
+          <option value="1">VAN/PICKUP</option>
+          <option value="2">LORRY/PICKUP</option>
+          <option value="3">SALOON</option>
+        </select>
+      </div>
+    </div>
+<!-- amount to lend -->
+    <label for="amount"
+      >Amount:
+      <input formControlName="amount" type="number" class="form-control"
+    /></label>
+    <div
+      [ngClass]="{
+        'alert alert-danger':
+          onboardingFormGroup.get('amount').touched ||
+          (onboardingFormGroup.get('amount').dirty &&
+            !onboardingFormGroup.get('amount').valid)
+      }"
+    >
+      <span *ngIf="onboardingFormGroup.get('amount').errors?.range"
+        >The minimum amount you can borrow is 1000 and your maximum borrowing
+        limit is 50000</span
+      >
+    </div>
+    <div class="form-group">
+      <label for="comment">Comment</label>
+      <textarea id="comment" name="comment" class="form-control"></textarea>
+    </div>
+    <!--the button passes form data to the onboard-lender component for creating a paypal account-->
+    <button
+      type="submit"
+      [disabled]="!onboardingFormGroup.valid"
+      class="btn btn-primary"
+    >
+      Submit Request
+    </button>
+
+    <small>
+      <strong
+        >When you submit the form you will be redirected to
+        <em>Paypal.</em>
+      </strong>
+    </small>
+  </form>
+  <br />Dirty {{ onboardingFormGroup.dirty }} <br />Pristine
+  {{ onboardingFormGroup.pristine }} <br />touched
+  {{ onboardingFormGroup.touched }} <br />untouched
+  {{ onboardingFormGroup.untouched }} <br />valid
+  {{ onboardingFormGroup.valid }} <br />{{ onboardingFormGroup.value | json }}
+</div>

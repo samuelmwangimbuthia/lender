@@ -1,21 +1,23 @@
 import { Injectable } from "@angular/core";
 import {HttpClient, HttpErrorResponse} from '@angular/common/http'
 import { Observable, throwError } from "rxjs";
-import {catchError, map, tap} from 'rxjs/operators'
-import { Playlist } from "./playlist";
+import {catchError, map, tap} from 'rxjs/operators';
+import { LendersOrBorrowers } from "./ILendersOrBorrowers";
+
 
 
 @Injectable({
   providedIn: "root",
 })
-export class PlaylistService {
-  private playListUrl = "https://reqres.in/api/users";
+export class LenderOrBorrowersService {
+  // private lendersOrBorrowersUrl = "http://reqres.in/api/users";
+  private lendersOrBorrowersUrl = "http://reqres.in/api/users";
 
   constructor(private http: HttpClient) {}
 
-  getPlaylist():Observable<Playlist[]> {
-    return this.http.get<Playlist[]>(this.playListUrl ).pipe(
-      map((response) => <Playlist[]>response),
+  getLenderOrBorrower():Observable<LendersOrBorrowers[]> {
+    return this.http.get<LendersOrBorrowers[]>(this.lendersOrBorrowersUrl ).pipe(
+      map((response) => <LendersOrBorrowers[]>response),
       catchError(this.handleError),
     );
 }
