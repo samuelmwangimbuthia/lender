@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="welcome-header">
+    <div class="logo">Lender</div>
+    <!-- <button type="button" class="btn btn-link to-right">Login/Sign Up</button> -->
+  </div>
+  <app-site-navigation></app-site-navigation>
+  <div>
+    <li>{{ selectedLender.data.id }}</li>
+    <li>{{ selectedLender.data.email }}</li>
+    <li>{{ selectedLender.data.first_name }}</li>
+    <li>{{ selectedLender.data.last_name }}</li>
+    <img src="{{selectedLender.data.avatar}}" alt="" />
+  </div>
+</div>

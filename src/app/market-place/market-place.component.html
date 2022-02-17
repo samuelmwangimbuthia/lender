@@ -16,7 +16,7 @@
         <li><img [src]="list.avatar" alt="Lender Image" /></li>
         <li>Offer Amount: Kshs 20,000</li>
         <li>Rate per Month: 20%</li>
-        <li class="to-right">See More</li>
+        <li class="to-right"><button [routerLink] = "['/more',list.id]">See More</button></li>
       </ul>
     </div>
     <footer class="bg-color">Your Number 1 money market

@@ -10,6 +10,8 @@ import { LendersOrBorrowers } from "./ILendersOrBorrowers";
   providedIn: "root",
 })
 export class LenderOrBorrowersService {
+
+  //1. To populate the market place with all the users
   // private lendersOrBorrowersUrl = "http://reqres.in/api/users";
   private lendersOrBorrowersUrl = "http://reqres.in/api/users";
 
@@ -20,6 +22,16 @@ export class LenderOrBorrowersService {
       map((response) => <LendersOrBorrowers[]>response),
       catchError(this.handleError),
     );
+}
+
+// 2. To view details of a single offering
+private baseUrl = 'http://reqres.in/api/users';
+getUser(id:number): Observable<LendersOrBorrowers[]>{
+  const url = `${this.baseUrl}/${id}`;
+  return this.http.get<LendersOrBorrowers[]>(url).pipe(
+    map((response) => <LendersOrBorrowers[]>response),
+    catchError(this.handleError),
+  );
 }
 
 private handleError(err:HttpErrorResponse){

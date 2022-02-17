@@ -1,4 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from "@angular/core";
+//to populate data for editing
+import { LenderOrBorrowersService } from "../lendersOrBorrowers.service";
 import {
   FormControl,
   FormGroup,
@@ -8,6 +10,9 @@ import {
   ValidatorFn,
   FormArray
 } from "@angular/forms";
+
+//reading the route parameters
+import{ActivatedRoute} from '@angular/router';
 
 // check if the value of the email input equals that of email confirmation input
 
@@ -54,7 +59,7 @@ export class StartLendingComponent implements OnInit {
     return <FormArray> this.onboardingFormGroup.get('titleDeeds')
   }
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private lender: LenderOrBorrowersService, private route: ActivatedRoute,) {}
 
   ngOnInit() {
     //set controls for all onboarding form input fields
@@ -83,6 +88,26 @@ export class StartLendingComponent implements OnInit {
   }
 
   //the method shall be reused by the borrower and lender component to prepopulate the form with
+  getUser(id:number):void{
+     id = +this.route.snapshot.paramMap.get('id');
+    console.log(id)
+    this.lender.getUser(id).subscribe((user1)=>{
+      //console.log(user1)
+      this.populateLendersData1(user1)
+    })
+  }
+  //with the saved data
+populateLendersData1(user1){
+  let user =user1.data
+  this.onboardingFormGroup.patchValue({
+    firstName: user.first_name,
+      lastName: user.last_name,
+      phoneNumber: 729782466,
+      collateral: ''
+  })
+  console.log(user.email)
+}
+
   /* with the saved data
 populateLendersData(){
   this.onboardingFormGroup.patchValue({
