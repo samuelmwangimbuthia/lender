@@ -22,6 +22,7 @@ import { SingUpComponent } from './sing-up/sing-up.component';
 const appRoutes:Routes = [
   {path: 'market', component: MarketPlaceComponent},
   {path: 'home', component: WelcomePageComponent},
+  {path: 'start/:id', component:OnboardLenderComponent},
   {path: 'start', component:OnboardLenderComponent},
   {path: 'settings', component:UserSettingsComponent},
   {path: 'more/:id', component:SeeMoreComponent},

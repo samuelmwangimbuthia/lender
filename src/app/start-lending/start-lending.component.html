@@ -2,7 +2,7 @@
   <app-site-navigation class="navigation bg-color"></app-site-navigation>
   <h1>Start your Lending Business Today</h1>
   <h2>Submit a Request</h2>
-  <form [formGroup]="onboardingFormGroup" class="form-group">
+  <form (ngSubmit)="editUser()" [formGroup]="onboardingFormGroup" class="form-group">
     <label for="firstName" class="form-label">First Name </label
     ><input
       formControlName="firstName"
@@ -203,12 +203,13 @@
     <!--the button passes form data to the onboard-lender component for creating a paypal account-->
     <button
       type="submit"
-      [disabled]="!onboardingFormGroup.valid"
+
       class="btn btn-primary"
     >
       Submit Request
     </button>
     <button (click)="getUser(1)">Test</button>
+    <button (click)="deleteUser()">Delete User</button>
 
     <small>
       <strong

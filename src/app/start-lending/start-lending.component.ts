@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from "@angular/core";
 //to populate data for editing
 import { LenderOrBorrowersService } from "../lendersOrBorrowers.service";
+import {LendersOrBorrowers} from "../ILendersOrBorrowers"
 import {
   FormControl,
   FormGroup,
@@ -54,11 +55,13 @@ export class StartLendingComponent implements OnInit {
   onboardingFormGroup: FormGroup;
 
   //create a property for the titleDeed array in form Model
-  debugger
+
   get titleDeeds(): FormArray{
     return <FormArray> this.onboardingFormGroup.get('titleDeeds')
   }
 
+
+user:LendersOrBorrowers
   constructor(private fb: FormBuilder, private lender: LenderOrBorrowersService, private route: ActivatedRoute,) {}
 
   ngOnInit() {
@@ -85,16 +88,22 @@ export class StartLendingComponent implements OnInit {
       .valueChanges.subscribe((value) => this.selectCollateral(value));
 
     //this.populateLendersData();
+    this.getUser()
   }
 
   //the method shall be reused by the borrower and lender component to prepopulate the form with
-  getUser(id:number):void{
-     id = +this.route.snapshot.paramMap.get('id');
+  getUser():void{
+     let id = +this.route.snapshot.paramMap.get('id');
     console.log(id)
+    if(id===0){
+      //this.initializeUser();
+    }else {
     this.lender.getUser(id).subscribe((user1)=>{
-      //console.log(user1)
+    //console.log(user1)
       this.populateLendersData1(user1)
     })
+  }
+
   }
   //with the saved data
 populateLendersData1(user1){
@@ -102,29 +111,69 @@ populateLendersData1(user1){
   this.onboardingFormGroup.patchValue({
     firstName: user.first_name,
       lastName: user.last_name,
-      phoneNumber: 729782466,
+      phoneNumber: user.id,
       collateral: ''
   })
   console.log(user.email)
 }
 
-  /* with the saved data
-populateLendersData(){
-  this.onboardingFormGroup.patchValue({
-    firstName: 'Emmanuel',
-      lastName: 'Mbuthia',
-      phoneNumber: 729782466,
-      email: 'mbuthia.jsamuel@gmail.com',
-      collateral: ''
-  })
-}
-*/
+//Return an initialized object
+// private initializeUser(){
+//   this.onboardingFormGroup.patchValue({
+//     firstName: 'Emmanuel',
+//       lastName: 'Mbuthia',
+//       phoneNumber: 729782466,
+//       email: 'mbuthia.jsamuel@gmail.com',
+//       confirmEmail: 'mbuthia.jsamuel@gmail.com',
+//       collateral: ''
+//   })
+// }
+
+
   /*createNewLender(data){
   console.log(data)
 } */
+  //update existing lender
+  // TO DO FIX :not properly reading the condition for id hence the else block is executed for post and put
+  editUser():void{
+
+    if(this.onboardingFormGroup.dirty){
+    //   let id = +this.route.snapshot.paramMap.get('id');
+    // console.log(id +'is the id ' + typeof(id))
+      const u ={...this.user, ...this.onboardingFormGroup.value};
+
+      if(u.id === 0){
+        //this.initializeUser();//not working
+        this.lender.createUser(u).subscribe(
+          (u) => console.log(u),
+        )
+      }else {
+        this.lender.updateUser(u).subscribe({
+          next: ()=> console.log(u.id)
+          // next: ()=>{this.onSaveComplete()}
+
+        }
+        )
+      }
+    }
+  }
+// TO DO: id is undefined
+  deleteUser():void{
+    let id = +this.route.snapshot.paramMap.get('id');
+    console.log(id)
+    this.lender.deleteUser(this.user.id).subscribe(
+      ()=> console.log('item deleted')
+    )
+  }
+
+  onSaveComplete():void{
+    this.onboardingFormGroup.reset();
+  }
 
   //TO DO: Save lender data
   createNewLender(data) {
+    let id = +this.route.snapshot.paramMap.get('id');
+    console.log(id)
     this.sendLenderData.emit(data);
   }
 
