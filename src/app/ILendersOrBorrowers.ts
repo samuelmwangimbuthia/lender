@@ -1,4 +1,5 @@
 export interface LendersOrBorrowers {
+
     id: number;
     email: string;
     first_name: string;

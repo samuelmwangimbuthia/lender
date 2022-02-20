@@ -9,13 +9,16 @@ import { LendersOrBorrowers } from "./ILendersOrBorrowers";
 })
 export class LenderOrBorrowersService {
 
-  private baseUrl = "http://reqres.in/api/users";
+ // private baseUrl = "http://reqres.in/api/users";
+
+ private baseUrl = "http://localhost:8080/api/lenders";
 
   constructor(private http: HttpClient) {}
 
 //1. To populate the market place with all the users
   getLenderOrBorrower(): Observable<LendersOrBorrowers[]> {
     return this.http.get<LendersOrBorrowers[]>(this.baseUrl).pipe(
+     tap ((response)=>console.log(response)),
       map((response) => <LendersOrBorrowers[]>response),
       catchError(this.handleError)
     );
@@ -23,18 +26,22 @@ export class LenderOrBorrowersService {
 
   // 2. To view details of a single offering
 
-  getUser(id: number): Observable<LendersOrBorrowers[]> {
-    const url = `${this.baseUrl}/${id}`;
+  getUser(id): Observable<LendersOrBorrowers[]> {
+     const url = `${this.baseUrl}/${id}`;
+    //const url = `${this.baseUrl}?id=${id}`; TO DO:
     return this.http.get<LendersOrBorrowers[]>(url).pipe(
+      tap ((response)=>console.log(response)),
       map((response) => <LendersOrBorrowers[]>response),
       catchError(this.handleError)
     );
   }
 
   //3. PUT : To update user data
+  // pass in the user to be updated
   //TO DO : update status for the accepted offers
-  updateUser(user:LendersOrBorrowers): Observable<LendersOrBorrowers> {
-    const url = `${this.baseUrl}/${user.id}`;
+  updateUser(user): Observable<LendersOrBorrowers> {
+    const url = `${this.baseUrl}/${user._id}`;
+    console.log(user.id)
     const headers = new HttpHeaders({'Content-Type':'application/json'});
     return this.http.put<LendersOrBorrowers>(url,user, { headers: headers}).pipe(
       tap(()=>console.log('updateUser: '+ JSON.stringify(user))),
@@ -44,7 +51,7 @@ export class LenderOrBorrowersService {
   //4. POST : To create a new user
   createUser(user): Observable<LendersOrBorrowers[]> {
     const headers = new HttpHeaders({'Content-Type':'application/json'});
-    user.id = null;
+   // user.id = null;
     return this.http.post<LendersOrBorrowers[]>(this.baseUrl,user, { headers: headers}).pipe(
       tap((user)=>console.log('createUser: '+ JSON.stringify(user))),
       map(()=>user)
@@ -52,7 +59,7 @@ export class LenderOrBorrowersService {
     }
     //5. Delete : TO Delete User
     // TO DO: shall delete offers
-    deleteUser(id:number): Observable<{}> {
+    deleteUser(id): Observable<{}> {
       const url = `${this.baseUrl}/${id}`;
       const headers = new HttpHeaders({'Content-Type':'application/json'});
       return this.http.delete<LendersOrBorrowers[]>(url, { headers: headers})
@@ -72,7 +79,8 @@ export class LenderOrBorrowersService {
   private initializeUser(): LendersOrBorrowers {
     // Return an initialized object
     return {
-      id: 0,
+
+      id: null,
       first_name: null,
       last_name: null,
       avatar: null,

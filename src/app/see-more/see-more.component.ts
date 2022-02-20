@@ -13,13 +13,14 @@ import{ActivatedRoute} from '@angular/router';
 })
 export class SeeMoreComponent implements OnInit {
 selectedLender:LendersOrBorrowers[] = [];
+
   constructor(private route: ActivatedRoute, private lender: LenderOrBorrowersService) { }
 
   ngOnInit() {
-    let id = +this.route.snapshot.paramMap.get('id');
+    let id = this.route.snapshot.paramMap.get('id');
     console.log(id)
     this.lender.getUser(id).subscribe(
-     //(data)=>{console.log(JSON.stringify(data))},
+    // (data)=>{console.log(JSON.stringify(data))},
      (data)=>{this.selectedLender = data}
     )
   }

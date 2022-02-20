@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from "@angular/core";
 //to populate data for editing
 import { LenderOrBorrowersService } from "../lendersOrBorrowers.service";
-import {LendersOrBorrowers} from "../ILendersOrBorrowers"
+import { LendersOrBorrowers } from "../ILendersOrBorrowers";
 import {
   FormControl,
   FormGroup,
@@ -9,11 +9,11 @@ import {
   Validators,
   AbstractControl,
   ValidatorFn,
-  FormArray
+  FormArray,
 } from "@angular/forms";
 
 //reading the route parameters
-import{ActivatedRoute} from '@angular/router';
+import { ActivatedRoute } from "@angular/router";
 
 // check if the value of the email input equals that of email confirmation input
 
@@ -56,19 +56,22 @@ export class StartLendingComponent implements OnInit {
 
   //create a property for the titleDeed array in form Model
 
-  get titleDeeds(): FormArray{
-    return <FormArray> this.onboardingFormGroup.get('titleDeeds')
+  get titleDeeds(): FormArray {
+    return <FormArray>this.onboardingFormGroup.get("titleDeeds");
   }
 
-
-user:LendersOrBorrowers
-  constructor(private fb: FormBuilder, private lender: LenderOrBorrowersService, private route: ActivatedRoute,) {}
+  user
+  constructor(
+    private fb: FormBuilder,
+    private lender: LenderOrBorrowersService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     //set controls for all onboarding form input fields
     this.onboardingFormGroup = this.fb.group({
-      firstName: ["", [Validators.required, Validators.minLength(1)]],
-      lastName: ["", [Validators.required, Validators.minLength(1)]],
+      first_name: ["", [Validators.required, Validators.minLength(1)]],
+      last_name: ["", [Validators.required, Validators.minLength(1)]],
       phoneNumber: null,
       emailGroup: this.fb.group(
         {
@@ -80,7 +83,7 @@ user:LendersOrBorrowers
       amount: [null, lendingAmount(1000, 50000)], //TO DO: Set the minimum and maximum based on credit rating
       collateral: "logbook",
       vehicleRegistrationNumber: "",
-      titleDeeds: this.fb.array([this.addTitleDeed()]) //hold multiple instances of the addTitleDeed method
+      titleDeeds: this.fb.array([this.addTitleDeed()]), //hold multiple instances of the addTitleDeed method
     });
     //watch and react to the selected collacteral
     this.onboardingFormGroup
@@ -88,92 +91,100 @@ user:LendersOrBorrowers
       .valueChanges.subscribe((value) => this.selectCollateral(value));
 
     //this.populateLendersData();
-    this.getUser()
+    this.getUser();
   }
 
   //the method shall be reused by the borrower and lender component to prepopulate the form with
-  getUser():void{
-     let id = +this.route.snapshot.paramMap.get('id');
-    console.log(id)
-    if(id===0){
-      //this.initializeUser();
+  getUser(): void {
+    let id = this.route.snapshot.paramMap.get("id");
+    console.log(id);
+     if(id !== null){
+      this.lender.getUser(id).subscribe((user1)=>{
+        //console.log(user1)
+          this.populateLendersData1(user1)
+        })
+     }
+    /* if(id===null){
+      let p = this.initializeUser();
+      console.log(p);
+
     }else {
     this.lender.getUser(id).subscribe((user1)=>{
     //console.log(user1)
       this.populateLendersData1(user1)
     })
-  }
-
+  } */
   }
   //with the saved data
-populateLendersData1(user1){
-  let user =user1.data
-  this.onboardingFormGroup.patchValue({
-    firstName: user.first_name,
-      lastName: user.last_name,
+  populateLendersData1(user1) {
+    let user = user1;
+    console.log(user);
+    this.onboardingFormGroup.patchValue({
+      first_name: user.first_name,
+      last_name: user.last_name,
       phoneNumber: user.id,
-      collateral: ''
-  })
-  console.log(user.email)
-}
+      collateral: "",
+    });
+    this.user = user1;
+    console.log(user);
+  }
 
-//Return an initialized object
-// private initializeUser(){
-//   this.onboardingFormGroup.patchValue({
-//     firstName: 'Emmanuel',
-//       lastName: 'Mbuthia',
-//       phoneNumber: 729782466,
-//       email: 'mbuthia.jsamuel@gmail.com',
-//       confirmEmail: 'mbuthia.jsamuel@gmail.com',
-//       collateral: ''
-//   })
-// }
+  //Return an initialized object
+  private initializeUser():LendersOrBorrowers {
+    return {
+      id: 0,
+      first_name: null,
+      last_name: null,
+      avatar:null,
+      email: null,
 
+    };
+  }
 
-  /*createNewLender(data){
-  console.log(data)
-} */
   //update existing lender
   // TO DO FIX :not properly reading the condition for id hence the else block is executed for post and put
-  editUser():void{
+  editUser(): void {
+    if (this.onboardingFormGroup.dirty) {
+         //let id = this.route.snapshot.paramMap.get('id');
+      //console.log(id +'is the id ' + typeof(id))
+      const u = { ...this.user, ...this.onboardingFormGroup.value };
+      console.log(this.user)
+     // console.log(this.onboardingFormGroup.value)
+     console.log(u)
 
-    if(this.onboardingFormGroup.dirty){
-    //   let id = +this.route.snapshot.paramMap.get('id');
-    // console.log(id +'is the id ' + typeof(id))
-      const u ={...this.user, ...this.onboardingFormGroup.value};
+      if (u.id === undefined) {
+       const s = this.initializeUser();
+       const p = {...s, ...u} // copy over the values from the form and overwrite any changed values
+        this.lender.createUser(p).subscribe({
+            next: ()=>{this.onSaveComplete()}
 
-      if(u.id === 0){
-        //this.initializeUser();//not working
-        this.lender.createUser(u).subscribe(
-          (u) => console.log(u),
+       }
         )
-      }else {
-        this.lender.updateUser(u).subscribe({
-          next: ()=> console.log(u.id)
-          // next: ()=>{this.onSaveComplete()}
-
-        }
-        )
+      } else {
+         this.lender.updateUser(u).subscribe({
+           next: ()=>{this.onSaveComplete()}
       }
+      )
+       }
     }
   }
-// TO DO: id is undefined
-  deleteUser():void{
-    let id = +this.route.snapshot.paramMap.get('id');
-    console.log(id)
-    this.lender.deleteUser(this.user.id).subscribe(
-      ()=> console.log('item deleted')
-    )
+  // TO DO: id is undefined
+  deleteUser(): void {
+   // let id = +this.route.snapshot.paramMap.get("id");
+    console.log(this.user._id);
+    this.lender.deleteUser(this.user._id).subscribe(
+      () => console.log("item deleted"));
   }
-
-  onSaveComplete():void{
+// defines what happens on successiful post put and delete operations
+  onSaveComplete(): void {
     this.onboardingFormGroup.reset();
+    //this.route.navigate('/Messages') Display success message
   }
 
-  //TO DO: Save lender data
+  //Save and send newly created lender data to the parent component (market place)
   createNewLender(data) {
-    let id = +this.route.snapshot.paramMap.get('id');
-    console.log(id)
+    let id = +this.route.snapshot.paramMap.get("id");
+    console.log(id);
     this.sendLenderData.emit(data);
   }
 
@@ -199,17 +210,17 @@ populateLendersData1(user1){
     landRegistrationNumber.updateValueAndValidity();
   }
   //Duplicate the input element when addAnotherTitle button is clicked
-  buildTitleDeed(): void{
-    this.titleDeeds.push(this.addTitleDeed())
+  buildTitleDeed(): void {
+    this.titleDeeds.push(this.addTitleDeed());
   }
   //create an additional title deed fields
   // TO DO: add other motor vehicles as security
-  addTitleDeed():FormGroup {
+  addTitleDeed(): FormGroup {
     return this.fb.group({
       landRegistrationNumber: "",
-      landSize:'',
-      landOwnerName:'',
-      identificationNumber:''
-    })
+      landSize: "",
+      landOwnerName: "",
+      identificationNumber: "",
+    });
   }
 }
