@@ -1,1 +1,30 @@
+.to-right {
+  color: rgb(68, 170, 47);
+}
 
+.to-right:link{
+  color:#ff0000
+}
+
+a:visited{
+  color:#006eff
+}
+
+a:hover{
+  color: #ff0000;
+}
+
+.header {
+  display: flex;
+  padding: 0.5em;
+
+}
+.header > .title{
+  color: rgb(63, 102, 230);
+  font-size: 1.5em;
+  font-weight: 500;
+}
+
+.header > .nav-right {
+  margin-left: auto;
+}

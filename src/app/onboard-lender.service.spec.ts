@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { PlaylistService } from './playlist.service';
+import { OnboardLenderService } from './onboard-lender.service';
 
-describe('PlaylistService', () => {
+describe('OnboardLenderService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: PlaylistService = TestBed.get(PlaylistService);
+    const service: OnboardLenderService = TestBed.get(OnboardLenderService);
     expect(service).toBeTruthy();
   });
 });

@@ -1,16 +1,33 @@
 <div class="container">
   <div class="inner-container">
-    <div class="header bg-color">Lender</div>
-      <app-site-navigation class="nav bg-color"></app-site-navigation>
-    <div class="listings3 bg-color" *ngFor="let list of _playList.data">
+    <div class="header bg-color">
+      <div class="title">Lender</div>
+      <div class="nav-right">
+        <a href="/" routerLink="/start" class="to-right">Start Lending Today</a>
+      </div>
+    </div>
+    <app-site-navigation class="navigation bg-color"></app-site-navigation>
+    <div class="title">Filter Offers By:</div>
+    <!-- <div class="listings bg-color" *ngFor="let list of _lenders.data"> -->
+    <div class="listings bg-color" *ngFor="let list of _lenders">
       <ul>
-        <li>{{ list.id }}</li>
-        <li>{{ list.email }}</li>
-        <li>{{ list.first_name }}</li>
-        <li>{{ list.last_name }}</li>
+        <li>#{{ list.id }}</li>
+        <li>Email:{{ list.email }}</li>
+        <li>{{ list.first_name + " " + list.last_name }}</li>
         <li><img [src]="list.avatar" alt="Lender Image" /></li>
+        <li>Offer Amount: Kshs 20,000</li>
+        <li>Rate per Month: 20%</li>
+        <li class="to-right"><button [routerLink] = "['/more',list._id]">See More</button></li>
+        <li class="to-right"><button [routerLink] = "['/start',list._id]">Edit User</button></li>
       </ul>
     </div>
-    <footer class="bg-color">Your Number 1 money market</footer>
+    <footer class="bg-color">Your Number 1 money market
+      <address>
+        Visit us at:<br>
+        lender.com<br>
+        Box 564, Nairobi<br>
+        Kenya.
+        </address>
+    </footer>
   </div>
 </div>
