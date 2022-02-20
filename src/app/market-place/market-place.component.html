@@ -8,7 +8,8 @@
     </div>
     <app-site-navigation class="navigation bg-color"></app-site-navigation>
     <div class="title">Filter Offers By:</div>
-    <div class="listings bg-color" *ngFor="let list of _lenders.data">
+    <!-- <div class="listings bg-color" *ngFor="let list of _lenders.data"> -->
+    <div class="listings bg-color" *ngFor="let list of _lenders">
       <ul>
         <li>#{{ list.id }}</li>
         <li>Email:{{ list.email }}</li>
@@ -16,7 +17,8 @@
         <li><img [src]="list.avatar" alt="Lender Image" /></li>
         <li>Offer Amount: Kshs 20,000</li>
         <li>Rate per Month: 20%</li>
-        <li class="to-right">See More</li>
+        <li class="to-right"><button [routerLink] = "['/more',list._id]">See More</button></li>
+        <li class="to-right"><button [routerLink] = "['/start',list._id]">Edit User</button></li>
       </ul>
     </div>
     <footer class="bg-color">Your Number 1 money market

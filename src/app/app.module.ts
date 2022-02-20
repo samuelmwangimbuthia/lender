@@ -11,13 +11,21 @@ import { StartLendingComponent } from './start-lending/start-lending.component';
 import { OnboardLenderComponent } from './onboard-lender/onboard-lender.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserSettingsComponent } from './user-settings/user-settings.component';
+import { SeeMoreComponent } from './see-more/see-more.component';
+import { SingUpComponent } from './sing-up/sing-up.component';
 //import { ButtonsModule } from 'ngx-bootstrap/buttons';
+
+// Imports for loading & configuring the in-memory web api
+// import {InMemoryWebApiModule} from 'angular-in-memory-web-api'
+// import {UserData} from './userData'
 
 const appRoutes:Routes = [
   {path: 'market', component: MarketPlaceComponent},
   {path: 'home', component: WelcomePageComponent},
+  {path: 'start/:id', component:OnboardLenderComponent},
   {path: 'start', component:OnboardLenderComponent},
   {path: 'settings', component:UserSettingsComponent},
+  {path: 'more/:id', component:SeeMoreComponent},
   {path: '', redirectTo: 'home', pathMatch: 'full'},
 
 ]
@@ -32,6 +40,8 @@ const appRoutes:Routes = [
     StartLendingComponent,
     OnboardLenderComponent,
     UserSettingsComponent,
+    SeeMoreComponent,
+    SingUpComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,6 +51,7 @@ const appRoutes:Routes = [
 
     ReactiveFormsModule,
    // ButtonsModule
+   //InMemoryWebApiModule.forRoot(UserData)
   ],
   providers: [],
   bootstrap: [AppComponent]

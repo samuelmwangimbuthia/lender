@@ -2,27 +2,27 @@
   <app-site-navigation class="navigation bg-color"></app-site-navigation>
   <h1>Start your Lending Business Today</h1>
   <h2>Submit a Request</h2>
-  <form [formGroup]="onboardingFormGroup" class="form-group">
-    <label for="firstName" class="form-label">First Name </label
+  <form (ngSubmit)="editUser()" [formGroup]="onboardingFormGroup" class="form-group">
+    <label for="first_name" class="form-label">First Name </label
     ><input
-      formControlName="firstName"
+      formControlName="first_name"
       type="text"
       class="form-control"
       [ngClass]="{
         'is-invalid':
-          onboardingFormGroup.get('firstName').touched &&
-          onboardingFormGroup.get('firstName').dirty &&
-            !onboardingFormGroup.get('firstName').valid
+          onboardingFormGroup.get('first_name').touched &&
+          onboardingFormGroup.get('first_name').dirty &&
+            !onboardingFormGroup.get('first_name').valid
       }"
     />
 
     <div class="invalid-feedback">
-      <span *ngIf="onboardingFormGroup.get('firstName').errors?.required"
+      <span *ngIf="onboardingFormGroup.get('first_name').errors?.required"
         >Name is required</span
       >
     </div>
-    <label for="lastName" class="form-label">Last Name </label
-    ><input formControlName="lastName" type="text" class="form-control" />
+    <label for="last_name" class="form-label">Last Name </label
+    ><input formControlName="last_name" type="text" class="form-control" />
     <label for="phoneNumber" class="form-label">Phone Number</label>
     <input formControlName="phoneNumber" type="text" class="form-control" />
     <div formGroupName="emailGroup" class="form-group">
@@ -203,11 +203,13 @@
     <!--the button passes form data to the onboard-lender component for creating a paypal account-->
     <button
       type="submit"
-      [disabled]="!onboardingFormGroup.valid"
+
       class="btn btn-primary"
     >
       Submit Request
     </button>
+    <button (click)="getUser(1)">Test</button>
+    <button (click)="deleteUser()">Delete User</button>
 
     <small>
       <strong
