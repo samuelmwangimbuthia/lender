@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { MarketPlaceComponent } from './market-place/market-place.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { SiteNavigationComponent } from './site-navigation/site-navigation.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { RouterModule, Routes } from '@angular/router';
 import { StartLendingComponent } from './start-lending/start-lending.component';
@@ -13,6 +12,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserSettingsComponent } from './user-settings/user-settings.component';
 import { SeeMoreComponent } from './see-more/see-more.component';
 import { SingUpComponent } from './sing-up/sing-up.component';
+import { MessagesComponent } from './messages/messages.component';
+import { AuthService } from './data/auth.service';
+import { SharedModuleModule } from './shared-module/shared-module.module';
+
+
+
+
 //import { ButtonsModule } from 'ngx-bootstrap/buttons';
 
 // Imports for loading & configuring the in-memory web api
@@ -26,7 +32,9 @@ const appRoutes:Routes = [
   {path: 'start', component:OnboardLenderComponent},
   {path: 'settings', component:UserSettingsComponent},
   {path: 'more/:id', component:SeeMoreComponent},
+  {path: 'messages', component:MessagesComponent},
   {path: '', redirectTo: 'home', pathMatch: 'full'},
+  {path: 'user', loadChildren:'./data/user/user.module#UserModule'}
 
 ]
 
@@ -35,25 +43,30 @@ const appRoutes:Routes = [
   declarations: [
     AppComponent,
     MarketPlaceComponent,
-    SiteNavigationComponent,
     WelcomePageComponent,
     StartLendingComponent,
     OnboardLenderComponent,
     UserSettingsComponent,
     SeeMoreComponent,
     SingUpComponent,
+    MessagesComponent,
+
+
+
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
     FormsModule,
-
+    SharedModuleModule,
     ReactiveFormsModule,
    // ButtonsModule
    //InMemoryWebApiModule.forRoot(UserData)
   ],
-  providers: [],
+  providers: [
+AuthService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

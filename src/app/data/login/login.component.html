@@ -1,0 +1,18 @@
+<app-site-navigation></app-site-navigation>
+<h1>Login</h1>
+<hr>
+<div class="col-md-4">
+  <form autocomplete="off" [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
+    <div class="form-group" >
+      <label for="userName">User Name:</label>
+      <input formControlName="userName" name="userName" id="userName" type="text" class="form-control" placeholder="User Name..." />
+    </div>
+    <div class="form-group" >
+      <label for="password">Password:</label>
+      <input formControlName="password" name="password" id="password" type="password" class="form-control"placeholder="Password..." />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Login</button>
+    <button type="button" class="btn btn-default" (click)="cancel()">Cancel</button>
+  </form>
+</div>
