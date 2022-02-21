@@ -12,8 +12,12 @@
 
 
 
-  /* background: url(/assets/images/pexels-jopwell-2422278.jpg);
-  background-size: contain; */
+  background: url(/assets/images/pexels-jopwell-2422278.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+ color: rgb(255, 255, 255);
+ height: 100%;
 }
 
 .lending {
