@@ -8,16 +8,13 @@
   grid-template-columns: 1fr, 1fr;
   grid-template-rows: 50px, auto;
   font-family: helvetica,"Times New Roman", Times, serif;
-  height: fit-content;
-
-
-
   background: url(/assets/images/pexels-jopwell-2422278.jpg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
- color: rgb(255, 255, 255);
+ color: rgb(253, 253, 253);
  height: 100%;
+ padding: 1em;
 }
 
 .lending {
@@ -35,26 +32,26 @@ the flex items */
   margin-left: 1.5em;
   }
 
-.lendig-img {
+/*.lendig-img {
   grid-column: 2/3;
   grid-row: 1/2;
 
- /* background: url(/assets/images/pexels-jopwell-2422278.jpg); */
+  background: url(/assets/images/pexels-jopwell-2422278.jpg);
 
 
-}
+} */
 .borrowing {
   grid-column: 2/3;
   grid-row: 2/3;
 }
-
+/*
 .borrowing-img {
   grid-column: 1/2;
   grid-row: 2/3;
 
-  /* background: url(/assets/images/borrowing.jpg); */
-  /* background-size: cover; */
-}
+  background: url(/assets/images/borrowing.jpg);
+   background-size: cover;
+} */
 img{
   height: 100%;
   width: 100%;
