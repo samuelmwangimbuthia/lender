@@ -8,7 +8,6 @@ const db = mongoose.connect('mongodb://localhost/lender') // the database to con
 const port = process.env.PORT || 8080
 const lendersRouter = express.Router();
 const Lender = require ('./src/app/lenderModel');
-const { BlockScopeAwareRuleWalker } = require('tslint');
 
 //To kick off the body parser for the purpose of the post method
 app.use(bodyParser.urlencoded({extended: true}));

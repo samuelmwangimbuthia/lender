@@ -1,3 +1,6 @@
+<div class="welcome-header">
+  <div class="logo">Lender</div>
+</div>
 <nav class="navigation ">
   <ul class="site-nav">
     <li><a routerLink= '/home'>Home</a></li>
@@ -5,6 +8,8 @@
     <li class="nav-right"><a routerLink= '/settings'>settings</a></li>
     <li><a href="#" class="fa fa-facebook">Facebook</a></li>
     <li><a href="#" class="fa fa-twitter">Twitter</a></li>
+    <li><button *ngIf="!auth.isAuthenticated()" type="button" class="btn btn-link to-right" [routerLink]="['/user/login']">Login/Sign Up</button></li>
+    <li><button *ngIf="auth.isAuthenticated()" type="button" class="btn btn-link to-right" [routerLink]="['/user/profile']">Welcome {{auth.currentUser.first_name}}</button></li>
   </ul>
 </nav>
 

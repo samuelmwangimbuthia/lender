@@ -1,0 +1,54 @@
+<div [ngSwitch]="action">
+  <!-- confirm that a user wants to complete a certain action -->
+  <div *ngSwitchCase="delete">
+    <h3>Delete Account</h3>
+    <p>
+      Are you sure you want to delete this account.
+      <span>you will loose all history</span>
+      <button>Delete</button>
+      <button>Cancel</button>
+    </p>
+  </div>
+
+  <!-- Display on delete action -->
+  <div *ngSwitchCase="delete offer">
+    <h3>Delete Offer</h3>
+    <p>
+      Are you sure you want to delete this offer.
+      <span
+        >We will retain the details of the offer in our database for the purpose
+        of history only</span
+      >
+      <span>History can only be deleted by deleting the account</span>
+      <button>Delete</button>
+      <button>Cancel</button>
+    </p>
+  </div>
+
+  <!-- Display on account creation -->
+  <div *ngSwitchCase="new user" >
+    <h3>Account Created</h3>
+    <p>
+      You have successifully created account.
+      <button>Continue</button>
+    </p>
+  </div>
+
+  <!-- Display on offer creation -->
+  <div *ngSwitchCase="new offer">
+    <h3>Offer Created</h3>
+    <p>
+      <span>You have successifully created a new offer</span>
+      <button>Add More</button>
+      <button>Continue to view your offers</button>
+    </p>
+  </div>
+  <!-- Updating details -->
+  <div *ngSwitchCase="update">
+    <h3>Details successifully updated</h3>
+    <p>
+      <button>Continue to view your offers</button>
+    </p>
+  </div>
+  <div *ngSwitchDefault></div>
+</div>

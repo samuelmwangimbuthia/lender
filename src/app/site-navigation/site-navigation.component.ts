@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../data/auth.service';
+
 
 @Component({
   selector: 'app-site-navigation',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SiteNavigationComponent implements OnInit {
 
-  constructor() { }
+  constructor(private auth: AuthService) { }
 
   ngOnInit() {
   }

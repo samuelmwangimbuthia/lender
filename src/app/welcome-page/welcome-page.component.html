@@ -1,9 +1,5 @@
 <div class="container">
   <div>
-    <div class="welcome-header">
-      <div class="logo">Lender</div>
-      <button type="button" class="btn btn-link to-right">Login/Sign Up</button>
-    </div>
     <app-site-navigation></app-site-navigation>
 
     <div class="welcomePage">
@@ -18,9 +14,9 @@
           <button routerLink="/start">Start Lending</button>
         </p>
       </div>
-      <div class="lending-img">
+      <!-- <div class="lending-img">
         <img src="/assets/images/pexels-jopwell.jpg" alt="" >
-      </div>
+      </div> -->
       <div class="borrowing">
         <h3 class="borrowing-heading heading2">
           Obtaining funds should be as easy
@@ -31,13 +27,13 @@
           <button>Borrow Now</button>
         </p>
       </div>
-      <div class="borrowing-img">
+      <!-- <div class="borrowing-img">
         <img src="/assets/images/pexels-jopwell.jpg"  alt="">
-      </div>
+      </div> -->
     </div>
     <div>Featured Offers</div>
     <div class="featured">
-      <div class=" bg-color " *ngFor="let list of _featuredLenders.data.slice(0,4)">
+      <div class=" bg-color " *ngFor="let list of _featuredLenders.slice(0,4)">
         <ul>
           <li>#{{ list.id }}</li>
           <li>Email:{{ list.email }}</li>

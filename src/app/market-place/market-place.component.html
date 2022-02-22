@@ -1,12 +1,9 @@
 <div class="container">
   <div class="inner-container">
-    <div class="header bg-color">
-      <div class="title">Lender</div>
-      <div class="nav-right">
-        <a href="/" routerLink="/start" class="to-right">Start Lending Today</a>
-      </div>
-    </div>
     <app-site-navigation class="navigation bg-color"></app-site-navigation>
+    <div class="nav-right">
+      <a href="/" routerLink="/start" class="to-right">Start Lending Today</a>
+    </div>
     <div class="title">Filter Offers By:</div>
     <!-- <div class="listings bg-color" *ngFor="let list of _lenders.data"> -->
     <div class="listings bg-color" *ngFor="let list of _lenders">
