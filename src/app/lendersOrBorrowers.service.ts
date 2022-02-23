@@ -12,6 +12,7 @@ export class LenderOrBorrowersService {
  // private baseUrl = "http://reqres.in/api/users";
 
  private baseUrl = "http://localhost:8080/api/lenders";
+ private offersUrl = "http://localhost:8080/offer/offers"
 
   constructor(private http: HttpClient) {}
 
@@ -65,6 +66,14 @@ export class LenderOrBorrowersService {
       return this.http.delete<LendersOrBorrowers[]>(url, { headers: headers})
     }
 
+    //6. To populate the market place with all the offers
+  getOffers(): Observable<LendersOrBorrowers[]> {
+    return this.http.get<LendersOrBorrowers[]>(this.offersUrl).pipe(
+     tap ((response)=>console.log(response)),
+      map((response) => <LendersOrBorrowers[]>response),
+      catchError(this.handleError)
+    );
+  }
   private handleError(err: HttpErrorResponse) {
     let errorMessage = "";
     if (err.error instanceof ErrorEvent) {

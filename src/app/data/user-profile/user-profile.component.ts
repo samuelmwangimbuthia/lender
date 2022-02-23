@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LenderOrBorrowersService } from 'src/app/lendersOrBorrowers.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -6,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-profile.component.css']
 })
 export class UserProfileComponent implements OnInit {
-
-  constructor() { }
+offers
+  constructor(private offer: LenderOrBorrowersService) { }
 
   ngOnInit() {
+    this.offer.getOffers().subscribe({
+      next: (offers) => {
+        this.offers = offers;
+      }
+    });
   }
 
 }
